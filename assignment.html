@@ -10,7 +10,37 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600,800,900" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
 
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales'],
+          ['Dec 21', 30],
+          ['Dec 22', 40],
+          ['Dec 23', 35],
+          ['Dec 24', 50],
+		  ['Dec 25', 60],
+		  ['Dec 26', 70],
+		  ['Dec 27', 80]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Company Performance',
+            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+          },
+          bars: 'vertical' // Required for Material Bar Charts.
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
   <style>
 	#side-nav{
 		border-right: 3px solid grey;
@@ -23,9 +53,8 @@
 		padding: 0px;
 	}
 	#side-nav-name-icon{
-		background-color: green;
+		background-color: rgb(66, 133, 244);
 		text-align: center;
-		padding-right: 20px;
 	}
 	hr.sidebar-divider {
 		border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -55,50 +84,105 @@
 		height: 80%;
 		width: 1px;
 	}
-	.progress{
-	  position: relative;
+	.progressbar{
+	  position: absolute;
+	  top:50px;
 	  margin: 4px;
 	  float:left;
 	  text-align: center;
 	}
 	.barOverflow{ /* Wraps the rotating .bar */
 	  position: relative;
-	  overflow: hidden; /* Comment this line to understand the trick */
-	  width: 90px; height: 45px; /* Half circle (overflow) */
+	  width: 180px; height: 90px; /* Half circle (overflow) */
 	  margin-bottom: -14px; /* bring the numbers up */
+	  overflow: hidden;
 	}
 	.bar{
 	  position: absolute;
 	  top: 0; left: 0;
-	  width: 90px; height: 90px; /* full circle! */
+	  width: 180px; height: 180px; /* full circle! */
 	  border-radius: 50%;
 	  box-sizing: border-box;
-	  border: 5px solid #eee;     /* half gray, */
-	  border-bottom-color: #0bf;  /* half azure */
-	  border-right-color: #0bf;
+	  border: 10px solid #ccc;     /* half gray, */
+	  border-bottom-color: rgb(66, 133, 244);  /* half azure */
+	  border-right-color: rgb(66, 133, 244);
+	}
+	.progressbar-border{
+		border: 2px solid #8080803b;
+		border-radius:10px;
+		background-color: white;
+		margin-top: 30px;
+		position: absolute;
+	}
+	.webinar{
+		border: 2px solid #8080803b;
+		border-radius:10px;
+		background-color: white;
+		margin-top: 30px;
+	}
+	.bar-graph{
+		border: 2px solid #8080803b;
+		border-radius:10px;
+		background-color: white;
+		margin-top: 30px;
+	}
+	.popular-episods{
+		border: 2px solid #8080803b;
+		border-radius:10px;
+		background-color: white;
+		margin-top: 30px;
+	}
+	ol {
+	  list-style: none;
+	}
+
+	ol>li+.h5:before {
+	  content: attr(seq) ". ";
+	}
+	.live{
+		padding-right: 5px;
+		padding-left: 0px;
+		color: green;
+	}
+	.Learn-more{
+		border: 2px solid #8080803b;
+		border-radius:10px;
+		background-color: white;
+		margin-top: 30px;
+	}
+	.guest{
+		font-size: 10px;
+	}
+	.side-nav-bar > .nav-item:hover{
+		background-color:rgb(66, 133, 244);
+	}
+	.side-nav-bar > .nav-item > .nav-link:hover{
+		color:white;
+
 	}
   </style>
     
 	<script>
-		$(".progress").each(function(){
-		  
-		  var $bar = $(this).find(".bar");
-		  var $val = $(this).find("span");
-		  var perc = parseInt( $val.text(), 10);
-
-		  $({p:0}).animate({p:perc}, {
-			duration: 3000,
-			easing: "swing",
-			step: function(p) {
-			  $bar.css({
-				transform: "rotate("+ (45+(p*1.8)) +"deg)", // 100%=180° so: ° = % * 1.8
-				// 45 is to add the needed rotation to have the green borders at the bottom
+		$(document).ready(function(){
+			$(".progressbar").each(function(){
+			  var $bar = $(this).find(".bar");
+			  var $val = $(this).find("span");
+			  var perc = parseInt( $val.text(), 10);
+			 
+			  $({p:0}).animate({p:perc}, {
+				duration: 3000,
+				easing: "swing",
+				step: function(p) {
+				  $bar.css({
+					transform: "rotate("+ (45+(p*1.8)) +"deg)", // 100%=180° so: ° = % * 1.8
+					// 45 is to add the needed rotation to have the green borders at the bottom
+				  });
+				  $val.text(p|0);
+				}
 			  });
-			  $val.text(p|0);
-			}
-		  });
+			}); 
 		});
-	</script
+	</script>
 	
 </head>
 <body style="background-color: #dae0e530">
@@ -109,11 +193,12 @@
 			<ul class="side-nav-bar" id="side-nav-main-bar"  style="list-style-type:none">
 			
 				<li style="position: relative; left:-90px; padding-bottom: 10px;">
-					<a class="sidebar-brand d-flex align-items-center justify-content-center" href="assignment.html">
-						<div class="sidebar-brand-icon rounded-circle" id="side-nav-name-icon" style="height:auto;width:3rem">
-						  <h3 style="padding-left: 5px; padding-top:3px">AV</h3>
+					<a class="sidebar-brand d-flex align-items-center justify-content-center" href="assignment.html" style="text-decoration:none">
+						<div class="sidebar-brand-icon rounded-circle" id="side-nav-name-icon" style="height:auto;color:white; padding:10px;font-weight:bold">
+						  AV<!--<h3 style="padding-left: 5px; padding-top:3px">AV</h3>-->
+						  <!--<img src="images/avatar.jpg" class="img-circle" alt="Cinque Terre">-->
 						</div>
-						<span style="padding-left: 10px;">Amit Vatwani</span>
+						<span style="padding-left: 10px; font-weight:bold">Amit Vatwani</span>
 						<span style="padding-left: 5px;"><i class='fas fa-plus' style='font-size:15px;position:relative;left:120px;color:grey;border:1px solid black;'></i></span>
 					 </a>
 			   </li>
@@ -328,17 +413,67 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-9"></div>
-				<div class="col-sm-3">
-					<div class="container">
-						<div class="progress">
-							 <div class="barOverflow">
-								<div class="bar"></div>
-							 </div>
-								<span>56.5</span>%
+				<div class="col-sm-8">
+					<div class="container bar-graph p-3">
+						<div id="barchart_material" style="width: auto; height: 300px;"></div>
+					</div>
+					<div class="container popular-episods p-3" style="height:20rem">
+						<p class="text-secondary" style="font-size:13px">Popular episods</p>
+						<div class="row">
+							<div class="col-sm-1"><span style="text-align:center;height:10px;width:40px;background-color:#8080803b;font-size:12px">1</span></div>
+							<div class="col-sm-8">
+								<h6>Kuji Podcast 33: Live</h6>
+								<p class="text-secondary guest">Guest: Nurlan  Saburov</p>
+							</div>
+							<div class="col-sm-1">1.99m</div>
+							<div class="col-sm-1"></div>
+							<div class="col-sm-1 live">Live</div>
 						</div>
+						<div class="row">
+						<div class="col-sm-1"><span style="text-align:center;height:10px;width:40px;background-color:#8080803b;font-size:12px">2</span></div>
+							<div class="col-sm-8">
+								<h6>Kuji Podcast 20: Live</h6>
+								<p class="text-secondary guest">Guest: Nurlan  Saburov</p>
+							</div>
+							<div class="col-sm-1">1.54m</div>
+							<div class="col-sm-1"></div>
+							<div class="col-sm-1 live">Live</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-1"><span style="text-align:center;height:10px;width:40px;background-color:#8080803b;font-size:12px">3</span></div>
+							<div class="col-sm-8">
+								<h6>Kuji Podcast 24: Live</h6>
+								<p class="text-secondary guest">Guest: Nurlan  Saburov</p>
+							</div>
+							<div class="col-sm-1">1.04m</div>
+							<div class="col-sm-1"></div>
+							<div class="col-sm-1 live">Live</div>
+						</div>
+						</div>
+						
+						
+					</div>
+				
+				<div class="col-sm-4">
+					<div class="container progressbar-border" style="position: relative;height: 12rem;padding:15px; text-align: center">
+						<span class="text-secondary" style="font-weight: bold">Audience satisfaction</span>
+						<div class="progressbar">
+						  <div class="barOverflow">
+							<div class="bar" style="transform: rotate(181.8deg);"></div>
+						  </div>
+						  <span>76</span>%
+						  
+						  <p class="text-secondary" style="font-size:12px">Based on likes/dislikes</p>
+						</div>	
+					</div>
+					<div class="container Learn-more p-3" style="background-color:rgb(66, 133, 244); color: white">
+						<p> Webinar</p>
+						<h5>Learn how you can earn more than 20% each month!</h5>
+						<p style="font-size: 12px">Join our webinar and learn how to increase more than 20% your monthly income.</p>
+						<p style="font-size: 15px">Learn more</p>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>
