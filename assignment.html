@@ -11,9 +11,6 @@
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
- 
- 
-  
   <style>
 	#side-nav{
 		border-right: 3px solid grey;
@@ -45,191 +42,307 @@
 	font-size: 12px;
 	padding-left: 5px;
 	}
+	.side-nav{
+		border-right: 2px solid #8080803b;
+		padding-top: 22px;
+	}
+	.mid-top-div+.mid-top-div:after{
+		content: "";
+		background: #ccc;
+		position: absolute;
+		bottom: 10%;
+		left: 0;
+		height: 80%;
+		width: 1px;
+	}
+	.progress{
+	  position: relative;
+	  margin: 4px;
+	  float:left;
+	  text-align: center;
+	}
+	.barOverflow{ /* Wraps the rotating .bar */
+	  position: relative;
+	  overflow: hidden; /* Comment this line to understand the trick */
+	  width: 90px; height: 45px; /* Half circle (overflow) */
+	  margin-bottom: -14px; /* bring the numbers up */
+	}
+	.bar{
+	  position: absolute;
+	  top: 0; left: 0;
+	  width: 90px; height: 90px; /* full circle! */
+	  border-radius: 50%;
+	  box-sizing: border-box;
+	  border: 5px solid #eee;     /* half gray, */
+	  border-bottom-color: #0bf;  /* half azure */
+	  border-right-color: #0bf;
+	}
   </style>
     
+	<script>
+		$(".progress").each(function(){
+		  
+		  var $bar = $(this).find(".bar");
+		  var $val = $(this).find("span");
+		  var perc = parseInt( $val.text(), 10);
+
+		  $({p:0}).animate({p:perc}, {
+			duration: 3000,
+			easing: "swing",
+			step: function(p) {
+			  $bar.css({
+				transform: "rotate("+ (45+(p*1.8)) +"deg)", // 100%=180° so: ° = % * 1.8
+				// 45 is to add the needed rotation to have the green borders at the bottom
+			  });
+			  $val.text(p|0);
+			}
+		  });
+		});
+	</script
+	
 </head>
-<body>
+<body style="background-color: #dae0e530">
 
 <div class="container">
-	<div class="col-sm-4">
-		<ul class="side-nav-bar" id="side-nav-main-bar"  style="list-style-type:none">
-		
-			<li>
-				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="assignment.html">
-					<div class="sidebar-brand-icon rounded-circle" id="side-nav-name-icon" style="height:auto;width:3rem">
-					  <h3 style="padding-left: 3px">AV</h3>
-					</div>
-					<span>Amit Vatwani</span>
-				 </a>
-		   </li>
-		   
-		  
-		    <li class="nav-item active">
+	<div class="row">
+		<div class="col-sm-4 side-nav" style="background-color: white">
+			<ul class="side-nav-bar" id="side-nav-main-bar"  style="list-style-type:none">
+			
+				<li style="position: relative; left:-90px; padding-bottom: 10px;">
+					<a class="sidebar-brand d-flex align-items-center justify-content-center" href="assignment.html">
+						<div class="sidebar-brand-icon rounded-circle" id="side-nav-name-icon" style="height:auto;width:3rem">
+						  <h3 style="padding-left: 5px; padding-top:3px">AV</h3>
+						</div>
+						<span style="padding-left: 10px;">Amit Vatwani</span>
+						<span style="padding-left: 5px;"><i class='fas fa-plus' style='font-size:15px;position:relative;left:120px;color:grey;border:1px solid black;'></i></span>
+					 </a>
+			   </li>
+			   
+			  
+				<li class="nav-item active">
+					<a class="nav-link" href="assignment.html">
+					  <i class='far fa-envelope side-nav-icon' style="font-size: 15px"></i>
+					  <span class="side-nav-tabs">Inbox</span></a>
+				</li>
+			  
+					
+					
+				<li class="nav-item">
 				<a class="nav-link" href="assignment.html">
-				  <i class='far fa-envelope side-nav-icon' style="font-size: 15px"></i>
-				  <span class="side-nav-tabs">Inbox</span></a>
-		    </li>
-		  
-				
-				
-			<li class="nav-item">
-			<a class="nav-link" href="assignment.html">
-			  <i class='far fa-bell' style='font-size:15px'></i>
-			  <span class="side-nav-tabs">Alerts</span></a>
-		  </li>
-		  
-		  
-		  
-		  <li class="nav-item">
-			<a class="nav-link" href="assignment.html">
-			  <i class='far fa-bell' style='font-size:15px'></i>
-			  <span class="side-nav-tabs">Overview</span></a>
-		  </li>
-	    </ul>
-		
-		<ul class="side-nav-bar" style="list-style-type:none">
+				  <i class='far fa-bell' style='font-size:15px'></i>
+				  <span class="side-nav-tabs">Alerts</span></a>
+			  </li>
+			  
+			  
+			  
+			  <li class="nav-item">
+				<a class="nav-link" href="assignment.html">
+				  <i class='far fa-bell' style='font-size:15px'></i>
+				  <span class="side-nav-tabs">Overview</span></a>
+			  </li>
+			</ul>
+			
+			<ul class="side-nav-bar" style="list-style-type:none">
 
-			<div class="sidebar-heading text-secondary">
-					Podcasts
-			 </div>
-			  <div id="accordion">
-				  
-					  <li class="nav-item">
-							<div class="card">
-							  <div class="card-header">
-								<a class="card-link" data-toggle="collapse" href="#collapseOne">
-								  <i class='far fa-bell' style='font-size:15px'></i>
-								  <span class="side-nav-tabs">Episods</span>
-								</a>
-							  </div>
-							  <div id="collapseOne" class="collapse" data-parent="#accordion">
-								<div class="card-body">
-								  <h6 class="collapse-header text-secondary">Episods Examples</h6>
-										
-										<a class="collapse-item" href="#">Episod 1</a>
-										
-										<a class="collapse-item" href="#">Episod 2</a>
+				<div class="sidebar-heading text-secondary">
+						Podcasts
+				 </div>
+				  <div id="accordion">
+					  
+						  <li class="nav-item">
+								<div class="card">
+								  <div class="card-header">
+									<a class="card-link" data-toggle="collapse" href="#collapseOne">
+									  <i class='far fa-bell' style='font-size:15px'></i>
+									  <span class="side-nav-tabs">Episods</span>
+									</a>
+								  </div>
+								  <div id="collapseOne" class="collapse" data-parent="#accordion">
+									<div class="card-body">
+									  <h6 class="collapse-header text-secondary">Episods Examples</h6>
+											
+											<a class="collapse-item" href="#">Episod 1</a>
+											
+											<a class="collapse-item" href="#">Episod 2</a>
+									</div>
+								  </div>
 								</div>
-							  </div>
-							</div>
-					  </li>
-					  
-					  
-					  <li class="nav-item">
-							<div class="card">
-							  <div class="card-header">
-								<a class="card-link" data-toggle="collapse" href="#collapseMedia">
-								  <i class='far fa-bell' style='font-size:15px'></i>
-								  <span class="side-nav-tabs">Media</span>
-								</a>
-							  </div>
-							  <div id="collapseMedia" class="collapse" data-parent="#accordion">
-								<div class="card-body">
-								  <h6 class="collapse-header text-secondary">Various Media's</h6>
-										
-										<a class="collapse-item" href="#">Images</a>
-										
-										<a class="collapse-item" href="#">Videos</a>
+						  </li>
+						  
+						  
+						  <li class="nav-item">
+								<div class="card">
+								  <div class="card-header">
+									<a class="card-link" data-toggle="collapse" href="#collapseMedia">
+									  <i class='far fa-bell' style='font-size:15px'></i>
+									  <span class="side-nav-tabs">Media</span>
+									</a>
+								  </div>
+								  <div id="collapseMedia" class="collapse" data-parent="#accordion">
+									<div class="card-body">
+									  <h6 class="collapse-header text-secondary">Various Media's</h6>
+											
+											<a class="collapse-item" href="#">Images</a>
+											
+											<a class="collapse-item" href="#">Videos</a>
+									</div>
+								  </div>
 								</div>
-							  </div>
-							</div>
-					  </li>
-					  
-					  
-					  <li class="nav-item">
-							<div class="card">
-							  <div class="card-header">
-								<a class="card-link" data-toggle="collapse" href="#collapseMaterial">
-								  <i class='far fa-bell' style='font-size:15px'></i>
-								  <span class="side-nav-tabs">Materials</span>
-								</a>
-							  </div>
-							  <div id="collapseMaterial" class="collapse" data-parent="#accordion">
-								<div class="card-body">
-								  <h6 class="collapse-header text-secondary">Materialized Parts</h6>
-										
-										<a class="collapse-item" href="#">Material 1</a>
-										
-										<a class="collapse-item" href="#">Material 2</a>
+						  </li>
+						  
+						  
+						  <li class="nav-item">
+								<div class="card">
+								  <div class="card-header">
+									<a class="card-link" data-toggle="collapse" href="#collapseMaterial">
+									  <i class='far fa-bell' style='font-size:15px'></i>
+									  <span class="side-nav-tabs">Materials</span>
+									</a>
+								  </div>
+								  <div id="collapseMaterial" class="collapse" data-parent="#accordion">
+									<div class="card-body">
+									  <h6 class="collapse-header text-secondary">Materialized Parts</h6>
+											
+											<a class="collapse-item" href="#">Material 1</a>
+											
+											<a class="collapse-item" href="#">Material 2</a>
+									</div>
+								  </div>
 								</div>
-							  </div>
-							</div>
-					  </li>
-					  
-					  
-					  <li class="nav-item">
-							<div class="card">
-							  <div class="card-header">
-								<a class="card-link" data-toggle="collapse" href="#collapseContact">
-								  <i class='far fa-bell' style='font-size:15px'></i>
-								  <span class="side-nav-tabs">Contacts</span>
-								</a>
-							  </div>
-							  <div id="collapseContact" class="collapse" data-parent="#accordion">
-								<div class="card-body">
-								  <h6 class="collapse-header text-secondary">Different Contacts</h6>
-										
-										<a class="collapse-item" href="#">Contact 1</a>
-										
-										<a class="collapse-item" href="#">Contact 2</a>
+						  </li>
+						  
+						  
+						  <li class="nav-item">
+								<div class="card">
+								  <div class="card-header">
+									<a class="card-link" data-toggle="collapse" href="#collapseContact">
+									  <i class='far fa-bell' style='font-size:15px'></i>
+									  <span class="side-nav-tabs">Contacts</span>
+									</a>
+								  </div>
+								  <div id="collapseContact" class="collapse" data-parent="#accordion">
+									<div class="card-body">
+									  <h6 class="collapse-header text-secondary">Different Contacts</h6>
+											
+											<a class="collapse-item" href="#">Contact 1</a>
+											
+											<a class="collapse-item" href="#">Contact 2</a>
+									</div>
+								  </div>
 								</div>
-							  </div>
-							</div>
-					  </li>
+						  </li>
+				  </div>
+			  </ul>
+			  <ul class="side-nav-bar" style="list-style-type:none">
+			  <div class="sidebar-heading text-secondary">
+				Analytics
 			  </div>
-		  </ul>
-		  <ul class="side-nav-bar" style="list-style-type:none">
-		  <div class="sidebar-heading text-secondary">
-			Analytics
-		  </div>
-		  
-		  <li class="nav-item">
-			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSub" aria-expanded="true" aria-controls="collapseSub">
-				<i class='far fa-bell' style='font-size:15px'></i>
-			 <span class="side-nav-tabs">Subscribers</span>
-			</a>
-			<div id="collapseSub" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-			  <div class="bg-green py-2 collapse-inner rounded">
-			  <h6 class="collapse-header text-secondary">Subscriber Count</h6>
-				
-				<a class="collapse-item" href="#">145</a>
-			  </div>
+			  
+			  <li class="nav-item">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSub" aria-expanded="true" aria-controls="collapseSub">
+					<i class='far fa-bell' style='font-size:15px'></i>
+				 <span class="side-nav-tabs">Subscribers</span>
+				</a>
+				<div id="collapseSub" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+				  <div class="bg-green py-2 collapse-inner rounded">
+				  <h6 class="collapse-header text-secondary">Subscriber Count</h6>
+					
+					<a class="collapse-item" href="#">145</a>
+				  </div>
+				</div>
+			  </li>
+			  
+			  
+			  <li class="nav-item">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseChannel" aria-expanded="true" aria-controls="collapseChannel">
+					<i class='far fa-bell' style='font-size:15px'></i>
+				 <span class="side-nav-tabs">Channels</span>
+				</a>
+				<div id="collapseChannel" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+				  <div class="bg-green py-2 collapse-inner rounded">
+				  <h6 class="collapse-header text-secondary">Different Channels</h6>
+					
+					<a class="collapse-item" href="#">Channel 1</a>
+					
+					<a class="collapse-item" href="#">Channel 2</a>
+				  </div>
+				</div>
+			  </li>
+			
+			 
+			  
+			  <li class="nav-item">
+				<a class="nav-link" href="assignment.html">
+				  <i class='far fa-bell' style='font-size:15px'></i>
+				  <span class="side-nav-tabs">Integrations</span></a>
+			  </li>
+			  
+			  
+			  <li class="nav-item">
+				<a class="nav-link" href="assignment.html">
+				  <i class='far fa-bell' style='font-size:15px'></i>
+				  <span class="side-nav-tabs"">Reports</span></a>
+			  </li>
+			  
+			  <hr class="sidebar-divider">
+			  
+			  <li class="nav-item">
+				<a class="nav-link" href="assignment.html">
+				  <i class='far fa-bell' style='font-size:15px;padding-left:0px;'></i>
+				  <span style="padding-left:5px;font-size:15px;">PodCaster</span></a>
+				  <div class="sidebar-heading text-secondary" style="padding-left:39px;">
+						ver.0.2.3
+					</div>
+			  
+			 </ul>
+			 
+			 
+		</div>
+		<div class="col-sm-8">
+			<div class="container p-3" style="border: 2px solid #8080803b;border-radius:10px;background-color: white;margin-top: 30px">
+				<div class="row" style="margin:auto">
+					<div class="col-sm-3 mid-top-div">
+						<span class="text-secondary">New Subscribers</span>
+						<h4>5,097</h4>
+						<i class='far fa-bell' style='font-size:10px'></i>
+						<span style="color:green;font-size: 15px">+33.45%</span>
+					</div>
+					<div class="col-sm-3 mid-top-div">
+						<span class="text-secondary">Streams</span>
+						<h4>47,403</h4>
+						<i class='far fa-bell' style='font-size:10px'></i>
+						<span style="color:red;font-size: 15px">-112.45%</span>
+					</div>
+					<div class="col-sm-3 mid-top-div">
+						<span class="text-secondary">Engagement rate</span>
+						<h4>25.81</h4>
+						<i class='far fa-bell' style='font-size:10px'></i>
+						<span style="color:green;font-size: 15px">+62.52%</span>
+					</div>
+					<div class="col-sm-3 mid-top-div">
+						<span class="text-secondary">Avg. watch time</span>
+						<h4>45.4 min</h4>
+						<i class='far fa-bell' style='font-size:10px'></i>
+						<span style="color:green;font-size: 15px">+4.46%</span>
+					</div>
+				</div>
 			</div>
-		  </li>
-		  
-		  
-		  <li class="nav-item">
-			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseChannel" aria-expanded="true" aria-controls="collapseChannel">
-				<i class='far fa-bell' style='font-size:15px'></i>
-			 <span class="side-nav-tabs">Channels</span>
-			</a>
-			<div id="collapseChannel" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-			  <div class="bg-green py-2 collapse-inner rounded">
-			  <h6 class="collapse-header text-secondary">Different Channels</h6>
-				
-				<a class="collapse-item" href="#">Channel 1</a>
-				
-				<a class="collapse-item" href="#">Channel 2</a>
-			  </div>
+			<div class="row">
+				<div class="col-sm-9"></div>
+				<div class="col-sm-3">
+					<div class="container">
+						<div class="progress">
+							 <div class="barOverflow">
+								<div class="bar"></div>
+							 </div>
+								<span>56.5</span>%
+						</div>
+					</div>
+				</div>
 			</div>
-		  </li>
-		
-		 
-		  
-		  <li class="nav-item">
-			<a class="nav-link" href="assignment.html">
-			  <i class='far fa-bell' style='font-size:15px'></i>
-			  <span class="side-nav-tabs">Integrations</span></a>
-		  </li>
-		  
-		  
-		  <li class="nav-item">
-			<a class="nav-link" href="assignment.html">
-			  <i class='far fa-bell' style='font-size:15px'></i>
-			  <span class="side-nav-tabs"">Reports</span></a>
-		  </li>
-	     </ul>
-	</div> 
+		</div>
+	</div>
+	
 </div>
 
 </body>
